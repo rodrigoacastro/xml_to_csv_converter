@@ -1,0 +1,8 @@
+Olá, Rodrigo, tudo bem?
+
+Espero que sim. Queria te pedir um suporte sobre um arquivo do Translog II em formato xml: estou com um grupo de pesquisa e queremos transformá-lo num arquivo de planilha do Excel (tipo .xls). Estamos tentando fazer isso pelo perl, mas não estamos conseguindo. Você sabe como podemos contornar isso?
+Estou te enviando um arquivo xml como exemplo em anexo.
+
+Agradeço muito se puder nos ajudar!
+
+Abraço,
