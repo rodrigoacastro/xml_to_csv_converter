@@ -38,6 +38,8 @@ for i in root:
     print(i)
     root_elements.append(i)
 
+# for i in root.findall('Events')
+
 #     Time = i.find("Time").text
 #     TT = i.find('TT').text
 #     Win = i.find('Win').text
