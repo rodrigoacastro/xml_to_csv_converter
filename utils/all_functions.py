@@ -9,6 +9,8 @@ import xml.etree.ElementTree as Xet
 def validate_file_format (filename: str, fileformat: str = '.xml')
 def get_xml_parse (filename: str)
 def convert_xml_tag_df (tagname: str, csv_output: str = "output.csv")
+def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv')
+
 
 '''
 
@@ -21,31 +23,27 @@ def validate_file_format (filename: str, fileformat: str = '.xml'):
     
     return (filename)
 
-def get_xml_parse (filename: str):
+def get_xml_parse (filename: str, source_folder: str = 'xml_source'):
 
-    xmlparse = Xet.parse(f'xml_source/{filename}')
+    xmlparse = Xet.parse(f'{source_folder}/{filename}')
     return (xmlparse)
 
 def convert_xml_tag_df (filename: str ,tagname: str, csv_output: str = "output.csv"):
     '''
     using an input (ex: Events) and a csv_output, returns a csv in the target folder (csv_target)
     '''
-    # Check output format
-    if (csv_output[-4:] == '.csv'):
-        pass
-    else:
-        csv_output = f'{csv_output}.csv'
+    # Check input and output format
+    file_to_convert = validate_file_format (filename=filename, fileformat='.xml')
+    csv_output = validate_file_format (filename=csv_output, fileformat = '.csv')
 
     event_data = []
-
-    file_to_convert = validate_file_format (filename = filename, fileformat = '.xml')
 
     # Parsing the XML file
 
     # Parsing the XML file
     # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
 
-    xmlparse = get_xml_parse (filename = file_to_convert)
+    xmlparse = get_xml_parse (filename = file_to_convert, source_folder='xml_source')
 
     root = xmlparse.getroot()
 
@@ -53,7 +51,7 @@ def convert_xml_tag_df (filename: str ,tagname: str, csv_output: str = "output.c
         # get tags and attributes under tag
         event_data.append(i.attrib) # variables with values
 
-# convert dict to df
+    # convert dict to df
     event_df = pd.DataFrame.from_dict(event_data)
     # print(event_df)
 
@@ -66,17 +64,17 @@ def convert_xml_tag_df (filename: str ,tagname: str, csv_output: str = "output.c
 
 def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv'):
     
-    file_to_convert = validate_file_format (filename = filename, fileformat = '.xml')
+    # Check input and output format
+    file_to_convert = validate_file_format (filename=filename, fileformat='.xml')
+    csv_output = validate_file_format (filename=csv_output, fileformat = '.csv')
 
     # Parsing the XML file
 
     # Parsing the XML file
     # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
 
-    xmlparse = get_xml_parse (filename = file_to_convert)
-
-    # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
-    print(xmlparse)
+    xmlparse = get_xml_parse (filename = file_to_convert,  source_folder='xml_source')
+    # print(xmlparse)
 
     root = xmlparse.getroot()
 
@@ -116,10 +114,10 @@ def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_out
     # convert dict to df
     event_df = pd.DataFrame.from_dict(event_data)
     event_df['event_type'] = event_type # NEED to reorder and put it in the front
-    print(event_df)
+    # print(event_df)
 
     # save csv
     csv_output = 'event_df.csv'
-
-    event_df.to_csv(f'csv_target/{csv_output}',index=False)
+    target_folder = 'csv_target'
+    event_df.to_csv(f'{target_folder}/{csv_output}',index=False)
     

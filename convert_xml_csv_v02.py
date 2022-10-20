@@ -5,7 +5,7 @@ import xml.etree.ElementTree as Xet
 import pandas as pd
 import csv
 from pipe import dedup, groupby, where, select, sort
-from utils.all_functions import convert_xml_tag_df, validate_file_format, get_xml_parse
+from utils.all_functions import validate_file_format, get_xml_parse, convert_xml_tag_df, convert_events_xml_tag_df
 
 # cols = ["name", "phone", "email", "date", "country"]
 # cols = []
@@ -94,3 +94,5 @@ convert_events_xml_tag_df (filename = 'T03_R.xml', tagname= 'Events', csv_output
     
 convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv')
 convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'FinalTextChar', csv_output= 'Finaltextchar.csv')
+
+print('All data extracted')
