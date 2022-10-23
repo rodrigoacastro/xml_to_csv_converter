@@ -1,5 +1,7 @@
 # Convert XML into csv - Data and Metadata
 
+target_xml = 'T03_R.xml'
+
 # extract xml_data
 print('Extracting data...')
 from get_xml_data import *

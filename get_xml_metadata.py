@@ -2,9 +2,11 @@
 
 # Importing the required libraries
 import pandas as pd
+from get_xml_data_metadata import target_xml
 from utils.all_functions import *
 
-file_to_convert = 'T03_R.xml'  # temporary
+# file_to_convert = 'T03_R.xml'  # temporary
+file_to_convert = target_xml
 # file_to_convert = input("Digite o nome do arquivo XML a ser convertido em CSV: ")
 # print(file_to_convert)
 
