@@ -9,6 +9,10 @@ import xml.etree.ElementTree as Xet
 def validate_file_format (filename: str, fileformat: str = '.xml')
 def get_xml_parse (filename: str)
 def convert_xml_tag_df (tagname: str, csv_output: str = "output.csv")
+def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv')
+def convert_dict_to_df (data_dict: dict)
+def save_csv_from_df (data_df, csv_output: str = 'data_df.csv', target_folder: str = 'csv_target')
+def join_metadata (df_tuple: list, axis: int = 0, colnames: list = ['metadata_property','value'])
 
 '''
 
@@ -21,31 +25,27 @@ def validate_file_format (filename: str, fileformat: str = '.xml'):
     
     return (filename)
 
-def get_xml_parse (filename: str):
+def get_xml_parse (filename: str, source_folder: str = 'xml_source'):
 
-    xmlparse = Xet.parse(f'xml_source/{filename}')
+    xmlparse = Xet.parse(f'{source_folder}/{filename}')
     return (xmlparse)
 
-def convert_xml_tag_df (filename: str ,tagname: str, csv_output: str = "output.csv"):
+def convert_xml_tag_df (filename: str ,tagname: str, export_csv = False, csv_output: str = "output.csv"):
     '''
     using an input (ex: Events) and a csv_output, returns a csv in the target folder (csv_target)
     '''
-    # Check output format
-    if (csv_output[-4:] == '.csv'):
-        pass
-    else:
-        csv_output = f'{csv_output}.csv'
+    # Check input and output format
+    file_to_convert = validate_file_format (filename=filename, fileformat='.xml')
+    csv_output = validate_file_format (filename=csv_output, fileformat = '.csv')
 
     event_data = []
-
-    file_to_convert = validate_file_format (filename = filename, fileformat = '.xml')
 
     # Parsing the XML file
 
     # Parsing the XML file
     # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
 
-    xmlparse = get_xml_parse (filename = file_to_convert)
+    xmlparse = get_xml_parse (filename = file_to_convert, source_folder='xml_source')
 
     root = xmlparse.getroot()
 
@@ -53,30 +53,32 @@ def convert_xml_tag_df (filename: str ,tagname: str, csv_output: str = "output.c
         # get tags and attributes under tag
         event_data.append(i.attrib) # variables with values
 
-# convert dict to df
+    # convert dict to df
     event_df = pd.DataFrame.from_dict(event_data)
     # print(event_df)
 
-    # save csv
-    target_folder = 'csv_target'
-    event_df.to_csv(f'{target_folder}/{csv_output}',index=False)
+    if export_csv:
+        # save csv
+        target_folder = 'csv_target'
+        event_df.to_csv(f'{target_folder}/{csv_output}',index=False)
+    else:
+        return (event_df)
 
 
 
-
-def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv'):
+def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', export_csv=False, csv_output= 'sourcetextchar.csv'):
     
-    file_to_convert = validate_file_format (filename = filename, fileformat = '.xml')
+    # Check input and output format
+    file_to_convert = validate_file_format (filename=filename, fileformat='.xml')
+    csv_output = validate_file_format (filename=csv_output, fileformat = '.csv')
 
     # Parsing the XML file
 
     # Parsing the XML file
     # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
 
-    xmlparse = get_xml_parse (filename = file_to_convert)
-
-    # xmlparse = Xet.parse(f'xml_source/{file_to_convert}')
-    print(xmlparse)
+    xmlparse = get_xml_parse (filename = file_to_convert,  source_folder='xml_source')
+    # print(xmlparse)
 
     root = xmlparse.getroot()
 
@@ -116,10 +118,33 @@ def convert_events_xml_tag_df (filename: str, tagname= 'SourceTextChar', csv_out
     # convert dict to df
     event_df = pd.DataFrame.from_dict(event_data)
     event_df['event_type'] = event_type # NEED to reorder and put it in the front
-    print(event_df)
+    # print(event_df)
+
+    if export_csv:
+        # save csv
+        csv_output = 'event_df.csv'
+        target_folder = 'csv_target'
+        event_df.to_csv(f'{target_folder}/{csv_output}',index=False)
+    else:
+        return (event_df)
+
+def convert_dict_to_df (data_dict: dict):
+    output_df = pd.DataFrame([data_dict])
+    return (output_df)
+
+
+def save_csv_from_df (data_df, csv_output: str = 'data_df.csv', target_folder: str = 'csv_target'):
+
+    # validate format
+    csv_output = validate_file_format(filename=csv_output, fileformat='.csv')
 
     # save csv
-    csv_output = 'event_df.csv'
+    data_df.to_csv(f'{target_folder}/{csv_output}', index=False)
+    print(f'Exported file {csv_output} to the folder {target_folder}')
 
-    event_df.to_csv(f'csv_target/{csv_output}',index=False)
-    
+def join_metadata (df_tuple: list, axis: int = 0, colnames: list = ['metadata_property','value']):
+    # df_tuple = (data_df.T, project_data_dict0_df.T,project_data_dict1_df.T)
+    metadata_df = pd.concat( df_tuple, axis=0)
+    metadata_df.reset_index(inplace=True)
+    metadata_df.columns = colnames
+    return(metadata_df)
