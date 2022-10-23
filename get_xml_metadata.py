@@ -1,14 +1,10 @@
-# Convert XML into csv
+# Convert XML into csv - Metadata
 
 # Importing the required libraries
-import xml.etree.ElementTree as Xet
 import pandas as pd
-import csv
-from pipe import dedup, groupby, where, select, sort
-# from utils.all_functions import validate_file_format, get_xml_parse, convert_dict_to_df, save_csv_from_df, join_metadata, convert_xml_tag_df, convert_events_xml_tag_df
 from utils.all_functions import *
 
-file_to_convert = 'T03_R_metadata.xml'  # temporary
+file_to_convert = 'T03_R.xml'  # temporary
 # file_to_convert = input("Digite o nome do arquivo XML a ser convertido em CSV: ")
 # print(file_to_convert)
 
@@ -24,9 +20,9 @@ xmlparse = get_xml_parse(filename=file_to_convert, source_folder='xml_source')
 root = xmlparse.getroot()
 
 # get tags and attributes under root
-print("Root Tags and attributes:")
-for i in root:
-    print(i.tag, i.attrib)
+# print("Root Tags and attributes:")
+# for i in root:
+#     print(i.tag, i.attrib)
 
 
 print('Capturing Project content')
@@ -46,11 +42,12 @@ for i in root.find("Project"):
     else:
         project_data_dict[i.tag] = i.attrib
 
-print(event_type)
-print(event_data)
+# print(event_type)
+# print(event_data)
 
-print(f'project_data_dict')
-print(f'Project: {project_data_dict}')
+# print(f'project_data_dict')
+
+# print(f'Project: {project_data_dict}')
 # {'FileName': 'C:\\Users\\Letra\\Desktop\\CROSS\\Projetos das Atividades\\T1_EL1.project',
 # 'Description': 'example project description', 'versionString': None, 'useSourceText': 'true',
 # 'promptSubjectName': 'true', 'useExtendedTranslations': 'false', 'showTimer': 'false', 'maxWindow': 'false',
@@ -75,7 +72,6 @@ project_data_dict1_df = convert_dict_to_df(project_data_dict1)
 # save_csv_from_df(project_data_dict1_df,
 #                  csv_output='project_metadata_languages.csv', target_folder='csv_target')
 
-print('some dfs saved')
 project_data_dict = pd.concat(
     [project_data_dict0_df, project_data_dict1_df], axis=1)
 # print(f'project_data_dict:\n{project_data_dict}')
@@ -84,7 +80,6 @@ project_data_dict = pd.concat(
 # save dataframe as csv file
 # project_data_df = convert_dict_to_df(project_data_dict)
 # save_csv_from_df(project_data_df, csv_output='project_data_df.csv', target_folder='csv_target')
-print('passed through here')
 
 print('Capturing other content')
 
@@ -97,8 +92,8 @@ for x in root:
         # print(x.text)
         data_dict[x.tag] = x.text
 
-print('data_dict')
-print(data_dict)
+# print('data_dict')
+# print(data_dict)
 # {'Subject': 'FBS105_T1_EL1', 'startTime': '2022-08-31T13:52:11.8241334-03:00',
 # 'endTime': '2022-08-31T14:02:35.0951334-03:00'}
 
@@ -113,9 +108,9 @@ data_df = convert_dict_to_df(data_dict)
 # join metadata dataframes logically
 
 
-metadata_df = join_metadata (df_tuple = (data_df.T, project_data_dict0_df.T,project_data_dict1_df.T),
-            axis = 0, colnames = ['metadata_property','value']
-    )
+metadata_df = join_metadata(df_tuple=(data_df.T, project_data_dict0_df.T, project_data_dict1_df.T),
+                            axis=0, colnames=['metadata_property', 'value']
+                            )
 
 # metadata_df = pd.concat((data_df.T, project_data_dict0_df.T,project_data_dict1_df.T), axis=0)
 # metadata_df.reset_index(inplace=True)
@@ -123,4 +118,6 @@ metadata_df = join_metadata (df_tuple = (data_df.T, project_data_dict0_df.T,proj
 
 save_csv_from_df(metadata_df, csv_output='metadata_df.csv',
                  target_folder='csv_target')
+
+print('All metadata extracted')
 
