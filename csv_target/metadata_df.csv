@@ -2,17 +2,25 @@ metadata_property,value
 Subject,FBS105_T1_EL1
 startTime,2022-08-31T13:52:11.8241334-03:00
 endTime,2022-08-31T14:02:35.0951334-03:00
+Events,"
+    "
+FinalTextUTF8,"A pesquisa investigou os riscos de estudantes de ensino fundamental repetirem um ou mais anos escolares, considerando suas características socioeconômicas e culturais. Para isso, utilizou dados de matrícula e rendimento escolar, registrados nos microdados do INEP e disponíveis para consulta pública. Tais dados foram analisados por modelos estatísticos de regressão multinível, técnica normalmente empregada em pesquisas sobre rendimento escolar. Os resultados indicam que estudantes do sexo masculino, negros e com nível socioeconômico mais baixo tem maiores riscos de serem reprovados e, por consequência, de abandonarem a escola. Tais apontamentos são importantes na elaboração de políticas públicas educacionais, que devem considerar os prejuízos que certos grupos sociais sofrem ao longo dos anos em que frequentam as escolas brasileiras."
+TargetTextChar,
+SourceTextChar,"
+    "
+FinalTextChar,"
+    "
+maxWindow,false
+useSourceText,true
 offlineGWM,false
 versionString,
 fullScreen,false
-lockWindows,false
-maxWindow,false
-useExtendedTranslations,false
 showTimer,false
-Description,example project description
-useSourceText,true
-FileName,C:\Users\Letra\Desktop\CROSS\Projetos das Atividades\T1_EL1.project
 promptSubjectName,true
+Description,example project description
+useExtendedTranslations,false
+FileName,C:\Users\Letra\Desktop\CROSS\Projetos das Atividades\T1_EL1.project
+lockWindows,false
 source,pt
 target,pt
 task,revision
