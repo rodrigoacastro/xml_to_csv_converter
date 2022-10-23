@@ -9,7 +9,7 @@ from pipe import dedup, groupby, where, select, sort
 from utils.all_functions import *
 
 file_to_convert = 'T03_R_metadata.xml'  # temporary
-# # file_to_convert = input("Digite o nome do arquivo XML a ser convertido em CSV: ")
+# file_to_convert = input("Digite o nome do arquivo XML a ser convertido em CSV: ")
 # print(file_to_convert)
 
 file_to_convert = validate_file_format(
@@ -124,66 +124,3 @@ metadata_df = join_metadata (df_tuple = (data_df.T, project_data_dict0_df.T,proj
 save_csv_from_df(metadata_df, csv_output='metadata_df.csv',
                  target_folder='csv_target')
 
-
-#
-# DRAFS
-###############################
-# if 'Project' in page.tag:
-#     print('project yes')
-# project = page.find('Project').text
-
-# title = page.find('title').text
-# content = page.find('content').text
-# print('title: %s; content: %s' % (title, content))
-
-# print(f'Project: {project}')
-
-
-# get tags and attributes under Project
-# print("Project Tags and attributes:")
-
-# # for i in root.iter("Project"):
-# #     # print(i.tag,i.attrib)
-
-# #     filename = i.find('Filename').text
-#     # print(filename)
-
-
-# ##########################################
-# # IMPORTANT
-# # the code below WORKS for Events
-
-# # print("Events Tags and attributes:")
-
-# event_data = []
-# event_type = []
-
-# for i in root.find("Events"):
-#     # tag = i.tag # each tag goes into a event_type column
-#     # get tags and attributes under Events
-#     event_type.append (i.tag) # type of event
-#     event_data.append(i.attrib) # variables with values
-
-# # print(event_type)
-# # print(event_data)
-
-# # convert dict to df
-# event_df = pd.DataFrame.from_dict(event_data)
-# event_df['event_type'] = event_type # NEED to reorder and put it in the front
-# print(event_df)
-
-# # save csv
-# csv_output = 'event_df.csv'
-
-# event_df.to_csv(f'csv_target/{csv_output}',index=False)
-
-# values = i.attrib
-
-# Tag:
-# Eye
-# Attribute:
-# {'Time': '268899', 'TT': '268843', 'Win': '0', 'Xl': '-1283', 'Yl': '-995', 'Xr': '-1283', 'Yr': '-995', 'pl': '-1', 'pr': '-1', 'Cursor': '0'}
-
-##############################
-
-##############################################################################

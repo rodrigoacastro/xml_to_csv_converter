@@ -88,11 +88,11 @@ from utils.all_functions import validate_file_format, get_xml_parse, convert_xml
 ##############################################################################
 # convert xml to df - Events
 
-convert_events_xml_tag_df (filename = 'T03_R.xml', tagname= 'Events', csv_output= 'event_df.csv')
+convert_events_xml_tag_df (filename = 'T03_R.xml', tagname= 'Events', export_csv=True, csv_output= 'event_df.csv')
 
 # implement solution for SourceTextChar and FinalTextChar tags
     
-convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'SourceTextChar', csv_output= 'sourcetextchar.csv')
-convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'FinalTextChar', csv_output= 'Finaltextchar.csv')
+convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'SourceTextChar', export_csv=True, csv_output= 'sourcetextchar.csv')
+convert_xml_tag_df (filename = 'T03_R.xml', tagname= 'FinalTextChar', export_csv=True, csv_output= 'Finaltextchar.csv')
 
 print('All data extracted')
