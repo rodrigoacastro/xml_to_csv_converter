@@ -10,17 +10,17 @@ SourceTextChar,"
     "
 FinalTextChar,"
     "
-fullScreen,false
+FileName,C:\Users\Letra\Desktop\CROSS\Projetos das Atividades\T1_EL1.project
+useSourceText,true
 useExtendedTranslations,false
-versionString,
-offlineGWM,false
 showTimer,false
+Description,example project description
 maxWindow,false
 lockWindows,false
-Description,example project description
 promptSubjectName,true
-useSourceText,true
-FileName,C:\Users\Letra\Desktop\CROSS\Projetos das Atividades\T1_EL1.project
+versionString,
+offlineGWM,false
+fullScreen,false
 source,pt
 target,pt
 task,revision
