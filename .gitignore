@@ -132,3 +132,9 @@ dmypy.json
 # test files only
 test_files/
 */teste4.xml
+
+# inputs
+xml_source/*
+
+# outputs
+csv_target/*
