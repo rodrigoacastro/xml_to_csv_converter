@@ -5,6 +5,9 @@ import pandas as pd
 from get_xml_data_metadata import target_xml
 from utils.all_functions import *
 
+name_target_xml = target_xml.replace('.xml','')
+
+
 # file_to_convert = 'T03_R.xml'  # temporary
 file_to_convert = target_xml
 # file_to_convert = input("Digite o nome do arquivo XML a ser convertido em CSV: ")
@@ -118,7 +121,7 @@ metadata_df = join_metadata(df_tuple=(data_df.T, project_data_dict0_df.T, projec
 # metadata_df.reset_index(inplace=True)
 # metadata_df.columns = ['metadata_property','value']
 
-save_csv_from_df(metadata_df, csv_output='metadata_df.csv',
+save_csv_from_df(metadata_df, csv_output=f'{name_target_xml}_metadata_df.csv',
                  target_folder='csv_target')
 
 print('All metadata extracted')

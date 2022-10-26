@@ -128,7 +128,7 @@ def convert_events_xml_tag_df(filename: str, tagname='SourceTextChar', export_cs
 
     if export_csv:
         # save csv
-        csv_output = 'event_df.csv'
+        csv_output = csv_output
         target_folder = 'csv_target'
         event_df.to_csv(f'{target_folder}/{csv_output}', index=False)
     else:
