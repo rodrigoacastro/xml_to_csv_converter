@@ -134,7 +134,7 @@ test_files/
 */teste4.xml
 
 # inputs
-xml_source/*
+# xml_source/*
 
 # outputs
-csv_target/*
+# csv_target/*
