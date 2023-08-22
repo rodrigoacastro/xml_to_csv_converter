@@ -27,7 +27,7 @@ psutil==5.9.3
 ptyprocess==0.7.0
 pure-eval==0.2.2
 pycodestyle==2.9.1
-Pygments==2.13.0
+Pygments>=2.15.0
 pyparsing==3.0.9
 python-dateutil==2.8.2
 pytz==2022.4
